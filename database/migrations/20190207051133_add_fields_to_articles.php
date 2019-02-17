@@ -28,8 +28,8 @@ class AddFieldsToArticles extends Migrator
      */
     public function change()
     {
-        $table = $this->table('articles', ['engine'=>'MyISAM', 'primary_key' => 'id']);
+        $table = $this->table('articles');
         $table->addColumn('view_times', 'integer', ['default' => 0])
-        ->addColumn('is_top', 'integer', ['default' => 0])->update();
+        /*->addColumn('is_top', 'integer', ['default' => 0])*/->update();
     }
 }
