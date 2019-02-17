@@ -33,6 +33,9 @@ class Articles extends Migrator
         ->addColumn('content', 'text')
         ->addColumn('category_id', 'integer')
         ->addColumn('created_at', 'datetime')
+        ->addColumn('view_times', 'integer', ['default' => 0])
+        ->addColumn('is_top', 'integer', ['default' => 0])
+        ->addColumn('is_show', 'boolean', ['default' => 1])
         ->addColumn('admin_id', 'integer', ['default' => null])
         ->addColumn('updated_at', 'datetime')->create();
     }
