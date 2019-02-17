@@ -1,0 +1,93 @@
+{extend name="layout"}
+{block name="main"}
+	<div class="card mt-3">
+		<div class="card-body">
+			<h5 class="card-title text-center">
+				{$article->title}
+			</h5>
+			<ul class="list-inline text-center text-muted">
+				<li class="list-inline-item"><small>发布日期：{$article->created_at}</small></li>
+				<li class="list-inline-item"><small>分类：<a href="{:url('index/index', ['category' => $article->category->id])}">{$article->category->name}</a></small></li>
+				{if $article->tags}
+				     <li class="list-inline-item">
+				 	<small>标签：
+				 		{foreach $article->tags as $tag}
+				 			<span><a class="card-link" href="{:url('index/index', ['tag' => $tag->name])}">{$tag->name}</a></span>
+				        {/foreach}
+				    </small>
+				    </li>
+				{/if}
+			</ul>
+
+			<p class="card-text">
+				{$article->content|raw}
+			</p>
+		</div>
+
+		<div class="card-footer text-center">
+		<ul class="list-inline">
+			<li class="list-inline-item mr-4">
+				<span class="d-block">
+				<a href="javascript:;" data-url="{:url('index/ArticleThumb/save', ['id' => $article->id, 'type' => 'up'])}" class="list-inline-item far fa-thumbs-up mr-4 text-muted card-link mx-auto">
+				
+			    </a>
+		    </span>
+			<span class="d-block" id="up_thumb_count">0</span>
+			</li>
+			
+			<li class="list-inline-item">
+				<span class="d-block">
+				<a href="javascript:;" class="list-inline-item far fa-thumbs-down text-muted card-link" data-url="{:url('index/ArticleThumb/save', ['id' => $article->id, 'type' => 'down'])}">
+				
+			    </a>
+			    </span>
+			<span class="d-block" id="down_thumb_count">0</span>
+			</li>
+			
+		</ul>
+		</div>
+	</div>
+
+	<div class="">
+		{include file='index/comment'}
+	</div>
+	
+
+	<script type="text/javascript">
+		$(function(){
+			getThumbCount();
+			$("a.far").on('click', function(){
+
+				const url = $(this).data('url');
+				$.ajax({
+					url:url,
+					type:'post',
+					success:function(res)
+					{
+						getThumbCount();
+					},
+					error:function(res)
+					{
+						if(res.status == 401)
+						{
+							location.href="/login";
+						}
+					}
+				});
+			});
+
+			function getThumbCount(){
+				$.ajax({
+					url:"{:url('index/ArticleThumb/read',['id' => $article->id])}",
+					type:'get',
+					success:function(res)
+					{
+						console.log(res);
+						$("#up_thumb_count").text(res.up_thumb_count);
+						$("#down_thumb_count").text(res.down_thumb_count);
+					}
+			    });
+			}
+		})
+	</script>
+{/block}

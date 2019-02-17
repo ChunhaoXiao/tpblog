@@ -1,0 +1,89 @@
+<div class="row mt-3">
+	<div class="col">
+	<form action="{:url('index/comment/save', ['id' => $article->id])}" method="post" id="comment_form">
+		<div class="form-group">
+			<label>发表评论 {if(empty(session('user', '', 'user')))}(请 <a href="{:url('index/login/save')}">登录</a> 发表评论){/if}</label>
+			<textarea class="form-control" name="content" rows="5">{if(!cache('config')['allow_comment'])}评论功能已关闭{/if}</textarea>
+		</div>
+		<div class="form-group text-right">
+			<button class="btn btn-info" type="submit">提交</button>
+		</div>
+	</form>
+	{volist name="article->comments" id="comment"}
+		<div class="row mb-3">
+			<div class="col-2">{$comment->user->name}</div>
+			<div class="col-6">
+				{$comment->content}
+				<p>
+				    <span class="text-muted mr-3">{$comment->created_at}</span>
+				    {if $comment->canDelete()}
+				    	<span class="list-inline-item"><a href="javascript:;" class="text-muted far fa-trash-alt" data-url="{:url('index/comment/delete', ['id' => $comment->id])}"></a></span>
+				    {/if}
+			    </p>
+
+			</div>
+		</div>
+	{/volist}
+	
+    </div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		$(".fa-trash-alt").on('click', function(){
+			const url = $(this).data('url');
+			var obj = $(this).parents('.row').first();
+			//alert(url);
+			$.ajax({
+				url:url,
+				type:'delete',
+				success:function(res)
+				{
+					$(obj).hide();
+				},
+				error:function(res)
+				{
+					alert(res.responseJSON[0]);
+				}
+			});
+		});
+
+		$("#comment_form").on('submit', function(event){
+			event.preventDefault();
+			const content = $(this).find('textarea').val();
+			const url = $(this).attr('action');
+			$.ajax({
+				url:url,
+				type:'post',
+				data:{content:content},
+				success:function(res)
+				{
+					if(res.status == 1)
+					{
+						$(".btn-info").hide();
+						$("#comment_form textarea").val('');
+						$(".text-right").html('评论成功');
+						setTimeout(function(){
+							location.reload();
+						}, 1000);
+					}
+					else
+					{
+						alert(res.errors);
+					}
+				},
+				error:function(res)
+				{
+					if(res.status == 401)
+					{
+						location.href="/login";
+					}
+					else
+					{
+						alert(res.responseJSON[0]);
+					}
+					
+				}
+			});
+		});
+	});
+</script>

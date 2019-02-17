@@ -1,0 +1,85 @@
+{extend name="layout"}
+{block name="content"}
+<p>添加广告</p>
+	<form method="post" action="{:url('admin/advertisement/save')}" enctype="multipart/form-data">
+		<div class="form-group col-6">
+			<label>描述</label>
+			<input type="text" name="name" class="form-control">
+	    </div>
+	    <div class="form-group col-6">
+	    	<label>广告位置</label>
+	    	<select class="form-control" name="position">
+	    		{foreach :config('adv.') as $k => $v}
+	    			<option value="{$k}">{$v}</option>
+	    		{/foreach}
+	    		
+	    	</select>
+	    </div>
+	    <div class="form-group col-6">
+	    	<label>广告链接</label>
+	    	<input type="text" name="link" class="form-control">
+	    </div>
+	    <div class="form-group col-6">
+	    	<label>广告图片</label>
+	    	<input type="file" name="picture" class="form-control">
+	    </div>
+	    <div class="form-group col-6">
+	    	<label>到期时间</label>
+	    	<input type="date" name="expire_date" class="form-control">
+	    </div>
+
+	    <div class="form-group col-6">
+	    	<label>是否显示</label>
+	    	<div class="form-input">
+	    		<input type="radio" name="disabled" value="0" checked="true">是
+	    		<input type="radio" name="disabled" value="1" >否
+	    	</div>
+	    </div>
+	    
+	    <div class="form-group col-6"> 
+	    	<button type='submit' class="btn btn-primary">提交</button>
+	    </div>
+	</form>
+	{include file="error"}
+
+	<script>
+		$(function(){
+			// $('#summernote').summernote({
+		 //        placeholder: 'Hello bootstrap 4',
+		 //        tabsize: 2,
+		 //        height: 300,
+		 //        callbacks: {
+			// 		onImageUpload: function(image) {
+			// 			editor = $(this);
+			// 			//console.log(image[0]);
+			// 			uploadImage(image[0], editor);
+			// 		}
+			// 	}
+		 //    });
+
+	     //    function uploadImage(image, editor) {
+			   //  var data = new FormData();
+			   // //console.log(image);
+			   //  data.append("image", image);
+			   //  //console.log(data);
+			   //  $.ajax({
+			   //      url: "{:url('admin/upload/save')}",
+			   //      cache: false,
+			   //      contentType: false,
+			   //      processData: false,
+			   //      data: data,
+			   //      type: "post",
+			   //      success: function(url) {
+			   //          console.log(url);
+			   //          var image = $('<img>').attr('src', url);
+		    //             $(editor).summernote("insertNode", image[0]);
+			   //      },
+			   //      error: function(data) {
+			   //          console.log(data);
+			   //      }
+			   //  });
+		    // }
+	    })
+      
+    </script>
+{/block}

@@ -1,0 +1,44 @@
+{extend name="layout"}
+
+{block name='content'}
+	{empty name="Think.session.status"}
+	<form method="post" action="{:url('admin/config/save')}" enctype="multipart/form-data">
+		{foreach $config_fields as $key => $item}
+
+			<div class="form-group col-6">
+				<label>{$item.label}</label>
+
+				{switch $item.type}
+					{case radio}
+						<div>
+						{foreach($item.options as $opkey => $option)}
+							<label>
+								 <input type="radio" name="{$key}" {if $data[$key] == $opkey} checked="true" {/if} value="{$opkey}">{$option}
+							</label>
+						{/foreach}
+					    </div>
+					{/case}  
+					{case text}
+						<input type="text" name="{$key}" class="form-control" value="{$data[$key] ??''}">
+					{/case} 
+					{case textarea}
+						<textarea name="{$key}" class="form-control" rows="5">{$data[$key] ?? ''}</textarea>
+					{/case} 
+					{case file}
+						<input type="file" name="{$key}">
+						{notempty name="data.logo"}
+							<img src="/static/logo/{$data.logo}" width="50" height="50">
+						 {/notempty}
+					{/case}
+				{/switch}
+		    </div>
+	    {/foreach}
+	    <div class="form-group col-6">
+	    	<button class="btn btn-primary" type="submit">提交</button>
+	    </div>
+	</form>
+	{else/}
+	<div class="alert alert-success">操作成功 <a class="alert-link" href="{:url('admin/config/create')}">返回</a></div>
+	{/empty}
+	
+{/block}

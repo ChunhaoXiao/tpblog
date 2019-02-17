@@ -1,0 +1,44 @@
+{extend name="layout"}
+{block name="content"}
+	
+	<form action="{:url('admin/comment/index')}">
+		<div class="form-group row">
+			<div class="col-2">
+				<input type="text" name="keyword" placeholder="关键字" class="form-control" value="{:request()->keyword}">
+			</div>
+			<div class="col-2">
+				<input type="text" name="article_id" placeholder="文章id" class="form-control" value="{:request()->article_id}">
+			</div>
+			<div class="col-2">
+				<input type="text" name="user" placeholder="用户名" class="form-control" {if !is_numeric(request()->user)} value="{:request()->user}" {/if}>
+			</div>
+			<div class="col-auto">
+				<button type="submit" class="btn btn-info">搜索</button>
+			</div>
+		</div>
+	</form>
+	<table class="table table-bordered">
+		<thead>
+			<th>id</th>
+			<th>评论内容</th>
+			<th>所属文章</th>
+			<th>评论者</th>
+			<th>评论时间</th>
+			<th></th>
+		</thead>
+		<tbody>
+			{volist name="datas" id='comment'}
+			<tr>
+				<td>{$comment.id}</td>
+				<td>{:substr($comment.content,0,50)}</td>
+				<td><a class="text-dark" href="{:url('admin/comment/index', ['article_id' => $comment->article->id])}">{$comment->article->title??'unknown'}</a></td>
+				<td><a class="text-dark" href="{:url('admin/comment/index', ['user' => $comment->user->id])}">{$comment->user->name?? 'unknown'}</a></td>
+				<td>{$comment->created_at}</td>
+				<td>
+					<a href="javascript:;" class="far fa-trash-alt text-muted" data-url="{:url('admin/comment/delete', ['id' => $comment->id])}"></a>
+				</td>
+			</tr>
+	        {/volist}
+		</tbody>
+    </table>
+{/block}

@@ -1,0 +1,23 @@
+{extend name="layout"}
+
+{block name="content"}
+	<p>标签列表</p>
+	<table class="table table-bordered">
+		<thead>
+			<th>id</th>
+			<th>标签名称</th>
+			<th>文章数量</th>
+			<th></th>
+	    </thead>
+	    <tbody>
+	    	{volist name="tags" id="tag"}
+	    	<tr>
+	    		<td>{$tag->id}</td>
+	    		<td>{$tag->name}</td>
+	    		<td><a href="{:url('/admin/article', ['tag'=>$tag->name])}">{$tag->articles_count}</a></td>
+	    		<td><a href="javascript:;" class="far fa-trash-alt text-secondary" data-url="{:url('admin/tag/delete', ['id'=> $tag->id])}"></a></td>
+	    	</tr>
+	    	{/volist}
+	    </tbody>
+	</table>
+{/block}

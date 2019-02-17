@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>管理中心</title>
+	{load file="/static/css/bootstrap.css"}
+
+	{load file="/static/js/jquery.js"}
+
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+	
+
+	{load file="/static/js/popper.min.js"}
+    {load file="/static/js/bootstrap.min.js"}
+
+    {load file="/static/js/summernote-bs4.js"}
+</head>
+<body>
+{include file='includes/nav'}
+<div class="container-fluid">
+	<div class="row h-100 p-2">
+		<div class="col-2">
+			<ul class="list-group list-group-flush">
+				<a href="{:url('/admin/cate')}" class="list-group-item list-group-item-action">文章分类</a>
+				<a class="list-group-item list-group-item-action" href="{:url('/admin/article')}">文章管理</a>
+				<a class="list-group-item list-group-item-action" href="{:url('/admin/tags')}">标签管理</a>
+				<a class="list-group-item list-group-item-action" href="{:url('/admin/comment')}">评论管理</a>
+				<a class="list-group-item list-group-item-action" href="{:url('/admin/user')}">用户管理</a>
+			</ul>
+		
+
+			<ul class="list-group list-group-flush">
+				<a href="{:url('/admin/advertise')}" class="list-group-item list-group-item-action">广告管理</a>
+				<a href="{:url('/admin/link')}" class="list-group-item list-group-item-action">友情链接</a>
+			</ul>
+
+			<ul class="list-group list-group-flush">
+				<a class="list-group-item list-group-item-action" href="{:url('/admin/navigator')}">
+					导航栏
+				</a>
+			</ul>
+
+			<ul class="list-group list-group-flush">
+				<a class="list-group-item list-group-item-action" href="{:url('/admin/config/create')}">
+					系统设置
+				</a>
+			</ul>
+
+
+		</div>
+
+		<div class="col-10  p-3">
+			{block name="content"}{/block}
+		</div>
+	</div>
+	
+	
+</div>
+    
+</body>
+</html>

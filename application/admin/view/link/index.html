@@ -1,0 +1,28 @@
+{extend name="layout"}
+{block name="content"}
+	<p class="p-2"><a href="{:url('admin/link/create')}" class="btn btn-primary">添加</a></p>
+	<table class="table table-bordered">
+		<thead>
+			<th>链接文字</th>
+			<th>链接地址</th>
+			<th>排序</th>
+			<th>是否启用</th>
+			<th></th>
+		</thead>
+		<tbody>
+			{volist name="links" id="link"}
+				<tr>
+					<td>{$link->name}</td>
+					<td>{$link->url}</td>
+					<td>{$link->display_order}</td>
+					<td>{if $link->disabled==0}已启用{else/}未启用{/if}</td>
+					<td>
+						<a href="{:url('admin/link/edit', ['id' => $link->id])}" class="far fa-edit text-muted mr-3"></a>
+						<a href="javascript:;" class="far fa-trash-alt text-muted" data-url="{:url('admin/link/delete', ['id' => $link->id])}"></a>
+					</td>
+				</tr>
+			{/volist}
+		</tbody>
+	
+    </table>
+{/block}

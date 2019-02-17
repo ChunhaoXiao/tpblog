@@ -1,0 +1,28 @@
+{extend name="layout"}
+{block name="content"}
+	<p class="p-2"><a href="{:url('admin/navigator/create')}" class="btn btn-primary">添加</a></p>
+	<table class="table table-bordered">
+		<thead>
+			<th>名称</th>
+			<th>链接地址</th>
+			<th>排序</th>
+			<th>是否启用</th>
+			<th></th>
+		</thead>
+		<tbody>
+			{volist name="datas" id="nav"}
+				<tr>
+					<td>{$nav->name}</td>
+					<td>{$nav->url}</td>
+					<td>{$nav->display_order}</td>
+					<td>{if $nav->is_show}已启用 {else/} 未启用{/if}</td>
+					<td>
+						<a href="{:url('admin/navigator/edit', ['id' => $nav->id])}" class="far fa-edit text-muted mr-3"></a>
+						<a href="javascript:;" class="far fa-trash-alt text-muted" data-url="{:url('admin/navigator/delete', ['id' => $nav->id])}"></a>
+					</td>
+				</tr>
+			{/volist}
+		</tbody>
+	
+    </table>
+{/block}

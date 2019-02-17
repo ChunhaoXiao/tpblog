@@ -1,0 +1,10 @@
+<div class="card mb-3">
+  <div class="card-header">最受欢迎</div>
+  <div class="card-body">
+    <!-- <h5 class="card-title">Primary card title</h5> -->
+    {volist name="favorite_articles" id="item"}
+      <p class="card-text"><a class="card-link text-dark" href="{:url('index/show', ['id' => $item->id])}">{$item->title}</a></p>
+    {/volist}
+
+  </div>
+</div>

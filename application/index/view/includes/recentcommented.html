@@ -1,0 +1,13 @@
+<div class="card mb-3">
+  <div class="card-header">最近评论</div>
+  <div class="card-body">
+    <!-- <h5 class="card-title">Primary card title</h5> -->
+    {volist name="latestCommentedArticles" id="item"}
+
+      <p class="card-text">
+      	<span class="d-block">{:mb_substr($item->content, 0, 15)}</span>
+      	<a class="card-link text-muted" href="{:url('index/show', ['id' => $item->article->id])}">{$item->article->title}</a></p>
+    {/volist}
+
+  </div>
+</div>

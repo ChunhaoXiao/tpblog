@@ -1,0 +1,12 @@
+<div class="card">
+	<span class="p-2">友情链接</span>
+	<div class="card-text p-2">
+		<ul class="list-inline">
+			{foreach $links as $link}
+				<li class="list-inline-item">
+					<a class="card-link text-dark" href="http://{$link->url}">{$link->name}</a>
+				</li>
+			{/foreach}
+		</ul>
+	</div>
+</div>

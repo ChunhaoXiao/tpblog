@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{$title|default="首页"}-{:cache('config')['title'] ?? ''}</title>
+	{load file="/static/css/bootstrap.css"}
+	{load file="/static/js/jquery.js"}
+
+	<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet"> -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+	{load file="/static/js/popper.min.js"}
+    {load file="/static/js/bootstrap.min.js"}
+    <style type="text/css">
+      html, body {
+          height: 100%;
+      }
+    </style>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light border container">
+  <a class="navbar-brand" href="/"><img src="/static/logo/{:cache('config')['logo']?? ''}" width="150" height="60"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+    	{foreach $navs as $nav}
+	        <li class="nav-item active">
+	        	<a class="nav-link" href="{$nav->url}">{$nav->name} <span class="sr-only">(current)</span></a>
+	        </li>
+      {/foreach}
+     <!--  <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li> -->
+      {if !empty(session('user', '', 'user'))}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {:session('user', '', 'user')->name}
+        </a>
+        
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <!-- <a class="dropdown-item" href="#">Action</a> -->
+          <a class="dropdown-item" href="javascript:;" id="logout" data-url="{:url('index/login/delete')}">退出</a>
+          <!-- <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>-->
+        </div> 
+        
+      </li>
+      {else/}
+         <li class="nav-item active">
+            <a class="nav-link" href="{:url('index/login/save')}">登录<span class="sr-only">(current)</span></a>
+          </li>
+      {/if}
+     
+    </ul>
+   <p class="m-3">{present name="ads.top"} <img src="/static/advertisement/{$ads.top.picture}" width="280" height="60"> {/present}</p>
+    <!-- <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form> -->
+  </div>
+</nav>

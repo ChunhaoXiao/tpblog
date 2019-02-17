@@ -1,0 +1,90 @@
+{extend name="layout"}
+{block name="content"}
+<p>发布文章</p>
+	<form method="post" action="{:url('admin/article/save')}" enctype="multipart/form-data">
+		<div class="form-group col-6">
+			<label>标题</label>
+			<input type="text" name="title" class="form-control">
+	    </div>
+	    <div class="form-group col-6">
+	    	<label>分类</label>
+	    	<select class="form-control" name="category_id">
+	    		{foreach \app\admin\model\Category::all() as $v}
+	    			<option value="{$v.id}">{$v.name}</option>
+	    		{/foreach}
+	    		
+	    	</select>
+	    </div>
+	    <div class="form-group col-8">
+	    	<label>内容</label>
+	    	<textarea name="content" class="form-control" cols="10" rows="10" id="summernote"></textarea>
+	    </div>
+	    <div class="form-group col-6">
+	    	<label>封面图片</label>
+	    	<input type="file" name="cover_picture">
+	    </div>
+	    <div class="form-group col-6">
+	    	<label>是否显示</label>
+	    	<div class="form-input">
+	    		<input type="radio" name="is_show" value="1" checked="true">是
+	    		<input type="radio" name="is_show" value="0" >否
+	    	</div>
+	    	
+	    </div>
+	    <div class="form-group col-6">
+	    	<label>置顶</label>
+	    	<input type="checkbox" name="is_top" value="1">
+	    </div>
+	    <div class="form-group col-6">
+	    	<label>
+	    		标签(可添加多个标签，用空格或逗号分隔)
+	    	</label>
+	    	<input type="text" name="tags" class="form-control">
+	    </div>
+	    <div class="form-group col-6"> 
+	    	<button type='submit' class="btn btn-primary">提交</button>
+	    </div>
+	</form>
+	{include file="error"}
+
+	<script>
+		$(function(){
+			$('#summernote').summernote({
+		        placeholder: 'Hello bootstrap 4',
+		        tabsize: 2,
+		        height: 300,
+		        callbacks: {
+					onImageUpload: function(image) {
+						editor = $(this);
+						//console.log(image[0]);
+						uploadImage(image[0], editor);
+					}
+				}
+		    });
+
+	        function uploadImage(image, editor) {
+			    var data = new FormData();
+			   //console.log(image);
+			    data.append("image", image);
+			    //console.log(data);
+			    $.ajax({
+			        url: "{:url('admin/upload/save')}",
+			        cache: false,
+			        contentType: false,
+			        processData: false,
+			        data: data,
+			        type: "post",
+			        success: function(url) {
+			            console.log(url);
+			            var image = $('<img>').attr('src', url);
+		                $(editor).summernote("insertNode", image[0]);
+			        },
+			        error: function(data) {
+			            console.log(data);
+			        }
+			    });
+		    }
+	    })
+      
+    </script>
+{/block}

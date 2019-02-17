@@ -1,0 +1,35 @@
+{extend name="layout"}
+
+{block name="content"}
+	<p><a class="btn btn-primary" href="{:url('admin/advertisement/create')}">添加广告</a></p>
+
+	<table class="table table-bordered">
+		<thead>
+			<th>描述</th>
+			<th>位置</th>
+			<th>是否显示</th>
+			<th>图片</th>
+			<th>链接</th>
+			<th>到期时间</th>
+			<th></th>
+		</thead>
+		<tbody>
+			{volist name="datas" id="adv"}
+				<tr>
+					<td>{$adv.name}</td>
+					<td>{:config('adv.')[$adv->position]}</td>
+					<td>{if $adv->disabled == 1}不显示{else/}显示{/if}</td>
+					<td>
+						<img src="/static/advertisement/{$adv->picture}" width="100" height="50">
+					</td>
+					<td>{$adv->link}</td>
+					<td>{$adv->expire_date}</td>
+					<td>
+						<a href="{:url('admin/advertisement/edit', ['id' => $adv->id])}" class="far fa-edit text-muted mr-3"></a>
+						<a href="javascript:;" class="far fa-trash-alt text-muted" data-url="{:url('admin/advertisement/delete', ['id' => $adv->id])}"></a>
+					</td>
+				</tr>
+			{/volist}
+		</tbody>
+	</table>
+{/block}

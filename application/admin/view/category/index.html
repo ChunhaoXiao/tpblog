@@ -1,0 +1,26 @@
+{extend name="layout"}
+{block name="content"}
+	<p class="p-2"><a href="{:url('create')}" class="btn btn-primary">添加</a></p>
+	<table class="table table-bordered">
+		<thead>
+			<th>分类名称</th>
+			<th>文章数量</th>、
+			<th>创建时间</th>
+			<th></th>
+		</thead>
+		<tbody>
+			{volist name="datas" id='category'}
+			<tr>
+				<td>{$category.name}</td>
+				<td>{$category->articles_count}</td>
+				<td>{$category->created_at}</td>
+				<td>
+					<a href="{:url('admin/Cate/edit', ['id' => $category->id])}" class="far fa-edit text-muted mr-3"></a>
+					<a href="javascript:;" class="far fa-trash-alt text-muted" data-url="{:url('admin/cate/delete', ['id' => $category->id])}"></a>
+				</td>
+			</tr>
+	        {/volist}
+		</tbody>
+	
+    </table>
+{/block}

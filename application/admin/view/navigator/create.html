@@ -1,0 +1,30 @@
+{extend name="layout"}
+
+{block name='content'}
+	
+	<form method="post" action="{:url('admin/navigator/save')}">
+		<div class="form-group col-6">
+			<label>名称</label>
+			<input type="text" name="name" class="form-control">
+	    </div>
+	    <div class="form-group col-6">
+			<label>链接地址</label>
+			<input type="text" name="url" class="form-control">
+	    </div>
+	    <div class="form-group col-6">
+			<label>排序</label>
+			<input type="number" name="display_order" class="form-control" value="0">
+	    </div>
+	    <div class="form-group col-6">
+			<label>是否启用</label>
+			<div>
+				 <input type="radio" name="is_show" value="1" checked="true">是
+			     <input type="radio" name="is_show" value="0">否
+		    </div>
+	    </div>
+	    <div class="form-group col-6">
+	    	<button class="btn btn-primary">提交</button>
+	    </div>
+	</form>
+	{include file="error"}
+{/block}
