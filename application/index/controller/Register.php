@@ -30,7 +30,7 @@ class Register extends Controller
     public function save(Request $request, User $user)
     {
         $validator = Validate::make([
-            'name' => 'require|min:3|max:20|unique:users',
+            'name' => 'require|max:10|unique:users',
             'password' => 'require|min:6|max:20|confirm',
             'email' => 'email|unique:users',
         ]); 

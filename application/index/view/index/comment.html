@@ -3,7 +3,7 @@
 	<form action="{:url('index/comment/save', ['id' => $article->id])}" method="post" id="comment_form">
 		<div class="form-group">
 			<label>发表评论 {if(empty(session('user', '', 'user')))}(请 <a href="{:url('index/login/save')}">登录</a> 发表评论){/if}</label>
-			<textarea class="form-control" name="content" rows="5">{cache('config')['allow_comment'] ?? '')}</textarea>
+			<textarea class="form-control" name="content" rows="5">{if(cache('config')['allow_comment'] == 0)}评论功能暂时关闭{/if}</textarea>
 		</div>
 		<div class="form-group text-right">
 			<button class="btn btn-info" type="submit">提交</button>
