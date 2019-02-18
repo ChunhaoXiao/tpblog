@@ -15,7 +15,7 @@ class Article extends Validate
 	protected $rule = [
         'title' => 'require|max:50|min:5',
         'category_id' => 'require',
-        'content' => 'require|min:20|max:2000',
+        'content' => 'require|min:20|max:3000',
         'cover' => 'image',
     ];
     
