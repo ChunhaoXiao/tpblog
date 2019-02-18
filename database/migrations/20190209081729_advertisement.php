@@ -28,7 +28,7 @@ class Advertisement extends Migrator
      */
     public function change()
     {
-        $table = $this->table('advertisements',  ['engine'=>'MyISAM', 'primary_key' => 'id']);
+        $table = $this->table('advertisements');
         $table->addColumn('name', 'string')
         ->addColumn('position', 'string', ['comment' => '广告位置'])
         ->addColumn('link', 'string', ['default' => ''])

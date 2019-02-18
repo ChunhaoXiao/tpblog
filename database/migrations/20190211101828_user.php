@@ -28,7 +28,7 @@ class User extends Migrator
      */
     public function change()
     {
-        $table = $this->table('users', ['engine'=>'MyISAM', 'primary_key' => 'id']);
+        $table = $this->table('users');
         $table->addColumn('name', 'string')
         ->addColumn('password', 'string')
         ->addColumn('email', 'string')

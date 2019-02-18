@@ -28,7 +28,7 @@ class Thumb extends Migrator
      */
     public function change()
     {
-        $table = $this->table('thumbs', ['engine' => 'MyISAM', 'primary_key' => 'id']);
+        $table = $this->table('thumbs');
         $table->addColumn('article_id', 'integer')
         ->addColumn('user_id', 'integer')
         ->addColumn('type', 'string')

@@ -28,7 +28,7 @@ class Link extends Migrator
      */
     public function change()
     {
-        $table = $this->table('links', ['engine'=>'MyISAM', 'primary_key' => 'id']);
+        $table = $this->table('links');
         $table->addColumn('name', 'string')
         ->addColumn('url', 'string')
         ->addColumn('disabled', 'boolean', ['default' => 0])

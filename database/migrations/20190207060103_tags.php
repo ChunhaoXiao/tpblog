@@ -28,7 +28,7 @@ class Tags extends Migrator
      */
     public function change()
     {
-        $table = $this->table('tags', ['engine'=>'MyISAM', 'primary_key' => 'id']);
+        $table = $this->table('tags');
         $table->addColumn('name', 'string')->create();
     }
 }

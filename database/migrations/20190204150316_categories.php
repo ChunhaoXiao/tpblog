@@ -28,7 +28,7 @@ class Categories extends Migrator
      */
     public function change()
     {
-        $table = $this->table('categories', array('engine'=>'MyISAM', 'primary_key' => 'id'));
+        $table = $this->table('categories');
         $table->addColumn('name', 'string', ['limit' => 60])
         ->addColumn('created_at', 'datetime')
         ->addColumn('updated_at', 'datetime')->create();

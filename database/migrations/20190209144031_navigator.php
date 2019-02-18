@@ -28,7 +28,7 @@ class Navigator extends Migrator
      */
     public function change()
     {
-        $table = $this->table('navigator', ['engine'=>'MyISAM', 'primary_key' => 'id']);
+        $table = $this->table('navigator');
         //$table->addColumn('category_id', 'integer')
         $table->addColumn('url', 'string')
         ->addColumn('name', 'string')

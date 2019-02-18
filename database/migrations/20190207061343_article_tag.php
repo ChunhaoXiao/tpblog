@@ -28,7 +28,7 @@ class ArticleTag extends Migrator
      */
     public function change()
     {
-        $table = $this->table('article_tag', ['engine'=>'MyISAM']);
+        $table = $this->table('article_tag', ['id' => false]);
         $table->addColumn('article_id', 'integer')
         ->addColumn('tag_id', 'integer')->create();
     }

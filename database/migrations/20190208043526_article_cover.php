@@ -28,7 +28,7 @@ class ArticleCover extends Migrator
      */
     public function change()
     {
-        $table = $this->table('article_cover', ['engine'=>'MyISAM', 'primary_key' => 'id']);
+        $table = $this->table('article_cover');
         $table->addColumn('path', 'string')
         ->addColumn('article_id', 'integer')
         ->addColumn('created_at', 'datetime')

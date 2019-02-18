@@ -28,7 +28,7 @@ class Comment extends Migrator
      */
     public function change()
     {
-        $table = $this->table('comment', ['engine'=>'MyISAM', 'primary_key' => 'id']);
+        $table = $this->table('comment');
         $table->addColumn('content', 'text')
         ->addColumn('user_id', 'integer')
         ->addColumn('article_id', 'integer')

@@ -28,7 +28,7 @@ class Articles extends Migrator
      */
     public function change()
     {
-        $table = $this->table('articles', ['engine'=>'MyISAM', 'primary_key' => 'id']);
+        $table = $this->table('articles');
         $table->addColumn('title', 'string', ['limit' => 50])
         ->addColumn('content', 'text')
         ->addColumn('category_id', 'integer')
