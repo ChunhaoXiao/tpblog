@@ -15,6 +15,7 @@
 				 			<span><a class="card-link" href="{:url('index/index', ['tag' => $tag->name])}">{$tag->name}</a></span>
 				        {/foreach}
 				    </small>
+				    <small class="ml-2">浏览次数:{$article->view_times}</small>
 				    </li>
 				{/if}
 			</ul>

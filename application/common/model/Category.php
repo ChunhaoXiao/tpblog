@@ -3,9 +3,12 @@
 namespace app\common\model;
 
 use think\Model;
+use think\model\concern\SoftDelete;
 
 class Category extends Model
 {
+	use SoftDelete;
+
 	protected $pk = 'id';
 
     protected $table = 'categories';
@@ -13,6 +16,8 @@ class Category extends Model
     protected $createTime = 'created_at';
 
     protected $updateTime = 'updated_at';
+    
+    protected $deleteTime = 'deleted_at';
 
     public function articles()
     {

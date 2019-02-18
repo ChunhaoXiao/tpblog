@@ -5,17 +5,21 @@ namespace app\common\model;
 use think\Model;
 use think\facade\Session;
 use app\common\traits\FailedLoginTrait;
-
+use think\model\concern\SoftDelete;
 
 class User extends Model
 {
     use FailedLoginTrait;
+
+    use SoftDelete;
 
     protected $table = 'users';
 
     protected $createTime = 'created_at';
 
     protected $updateTime = 'updated_at';
+
+    protected $deleteTime = 'deleted_at';
 
     public static function init()
     {

@@ -12,10 +12,10 @@ class IncreaseArticleViewCount
     	$article = Article::get($id);
     	if($article)
     	{
-    		if(!Session::has('viewed'))
+    		if(!Session::has('viewed_'.$id))
     		{
     			$article->setInc('view_times');
-    			Session::set('viewed', 1);
+    			Session::set('viewed_'.$id, 1);
     		}
     	}
     	return $next($request);

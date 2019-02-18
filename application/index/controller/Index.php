@@ -3,6 +3,7 @@ namespace app\index\controller;
 use app\common\services\ArticleService;
 use think\Request;
 use think\facade\Session;
+use think\facade\Hook;
 
 class Index
 {
@@ -15,6 +16,7 @@ class Index
 
     public function index(ArticleService $articleService, Request $request)
     {
+        //
     	$articles = $this->articleService->listArticles($request->get());
         return view('index/index', ['articles' => $articles]);
     }

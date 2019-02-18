@@ -6,15 +6,19 @@ use think\Model;
 use think\facade\Session;
 use think\Validate;
 //use think\facade\
-
+use think\model\concern\SoftDelete;
 class Advertisement extends Model
 {
+    use SoftDelete;
+
     protected $table = 'advertisements';
 
     protected $createTime = 'created_at';
 
     protected $updateTime = 'updated_at';
 
+    protected $deleteTime = 'deleted_at';
+    
     public static $types = [
         'top' => [
             'name' => '顶部广告', 
@@ -42,7 +46,7 @@ class Advertisement extends Model
         }
         if(!empty($data['picture']))
         {
-            $uploaded = $data['picture']->move('./public/static/advertisement');
+            $uploaded = $data['picture']->move('./static/advertisement');
             $data['picture'] = $uploaded->getSaveName();
         }
         if($id)

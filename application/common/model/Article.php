@@ -4,14 +4,19 @@ use think\Model;
 use think\Db;
 use think\facade\Session;
 use think\facade\Cache;
-
+use think\model\concern\SoftDelete;
 class Article extends Model
 {
+    use SoftDelete;
+
     protected $table = 'articles';
 
     protected $createTime = 'created_at';
 
     protected $updateTime = 'updated_at';
+
+    protected $deleteTime = 'deleted_at';
+
 
     public function category()
     {
