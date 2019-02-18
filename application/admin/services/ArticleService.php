@@ -35,7 +35,7 @@ class ArticleService
 
 		if(!empty($data['cover_picture']))
 		{
-			$fileName = $data['cover_picture']->move('./public/static/uploads')->getSaveName();
+			$fileName = $data['cover_picture']->move('./static/uploads')->getSaveName();
 			//dump($fileName);
 			$article->setCover($fileName);
 		}

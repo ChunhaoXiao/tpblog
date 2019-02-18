@@ -58,7 +58,7 @@ class Config extends Model
     {
     	if(!empty($data['logo']))
     	{
-    		$logo = $data['logo']->move('./public/static/logo');
+    		$logo = $data['logo']->move('./static/logo');
     		$data['logo'] = $logo->getSaveName();
     	}
     	$existsConfigs = self::column(null, 'name');
