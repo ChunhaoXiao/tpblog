@@ -9,8 +9,16 @@ class loadConfig
 	{
 		if(!$configs = Cache::get('config'))
 		{
-			$configs = Config::column('value', 'name');
-			Cache::set('config', $configs);//永久缓存 除非后台更新设置
+			//初始化
+			$keys = array_keys(Config::$configFields);
+
+			$configDatas = Config::column('value', 'name');
+
+			foreach($keys as $key)
+			{
+				$cacheConfigData[$key] = $configDatas[$key] ?? '';
+			}
+			Cache::set('config', $cacheConfigData);//永久缓存 除非后台更新设置
 		}
 	}
 }

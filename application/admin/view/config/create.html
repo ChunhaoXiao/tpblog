@@ -13,7 +13,7 @@
 						<div>
 						{foreach($item.options as $opkey => $option)}
 							<label>
-								 <input type="radio" name="{$key}" {if $data[$key] == $opkey} checked="true" {/if} value="{$opkey}">{$option}
+								 <input type="radio" name="{$key}" {if isset($data[$key]) && $data[$key]  == $opkey} checked="true" {/if} value="{$opkey}">{$option}
 							</label>
 						{/foreach}
 					    </div>
