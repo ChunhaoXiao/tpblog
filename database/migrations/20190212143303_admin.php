@@ -28,7 +28,7 @@ class Admin extends Migrator
      */
     public function change()
     {
-        $table = $this->table('admin', ['engine' => 'MyISAM', 'primary_key' => 'id']);
+        $table = $this->table('admin', ['primary_key' => 'id']);
         $table->addColumn('name', 'string')
         ->addColumn('password', 'string')
         ->addColumn('login_count', 'integer', ['default' => 0])

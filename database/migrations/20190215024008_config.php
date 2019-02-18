@@ -28,7 +28,7 @@ class Config extends Migrator
      */
     public function change()
     {
-        $table = $this->table('config', ['engine' => 'MyISAM', 'primary_key' => 'id']);
+        $table = $this->table('config', ['primary_key' => 'id']);
         $table->addColumn('name', 'string')
         ->addColumn('value', 'string')
         ->addColumn('created_at', 'datetime')
