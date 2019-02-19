@@ -2,20 +2,34 @@
 
 {block name='content'}
 	{empty name="cate"}
-	<form method="post" action="{:url('admin/cate/save')}">
+	<form method="post" action="{:url('admin/cate/save')}" enctype="multipart/form-data">
 		<div class="form-group col-6">
 			<label>分类名称</label>
 			<input type="text" name="name" class="form-control">
+	    </div>
+	    <div class="form-group col-6">
+	    	<label>图标</label>
+	    	<input type="file" name="icon" class="form-control">
 	    </div>
 	    <div class="form-group col-6">
 	    	<button class="btn btn-primary">提交</button>
 	    </div>
 	</form>
 	{else/}
-	<form method="post" action="{:url('admin/cate/update', ['id' => $cate->id])}">
+	<form method="post" action="{:url('admin/cate/update', ['id' => $cate->id])}" enctype="multipart/form-data">
 		<div class="form-group col-6">
 			<label>分类名称</label>
 			<input type="text" name="name" class="form-control" value="{$cate->name}">
+	    </div>
+			<div class="form-group col-6">
+	    	<label>图标</label>
+	    	<input type="file" name="icon" class="form-control">
+				{notempty name="cate.icon"}
+				<p class="m-2">
+					<img src="/static/cate/{$cate->icon}" width="50" height="50" alt="">
+				</p>
+
+				{/notempty}
 	    </div>
 	    <input type="hidden" name="_method" value="PUT">
 	    <div class="form-group col-6">

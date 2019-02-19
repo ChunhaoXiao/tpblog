@@ -6,7 +6,7 @@ use think\Controller;
 use think\Request;
 use app\common\model\Category;
 use think\Validate;
-
+use think\facade\App;
 class Cate extends Controller
 {
     /**
@@ -38,11 +38,15 @@ class Cate extends Controller
      */
     public function save(Request $request)
     {
-        $data = $request->only('name');
+        $data = $request->only('name') + $request->file();
         $result = $this->validate($data, 'app\admin\validate\Cate');
         if($result !== true)
         {
             return redirect('admin/cate/create')->with('errors', $result);
+        }
+        if(!empty($data['icon']))
+        {
+            $data['icon'] = $data['icon']->move('./static/cate')->getSaveName();
         }
         Category::create($data);
         return redirect('/admin/cate');
@@ -67,7 +71,7 @@ class Cate extends Controller
      */
     public function edit(Category $cate)
     {
-        return view('category/create', ['cate' => $cate]);   
+        return view('category/create', ['cate' => $cate]);
     }
 
     /**
@@ -79,12 +83,16 @@ class Cate extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        $data = $request->only('name');
+        $data = $request->only('name') + $request->file();
         $result = $this->validate($data, 'app\admin\validate\Cate');
 
         if($result !== true)
         {
             return redirect('admin/cate/create')->with('errors', $result);
+        }
+        if(!empty($data['icon']))
+        {
+            $data['icon'] = $data['icon']->move('./static/cate')->getSaveName();
         }
         $category->save($data);
         return redirect('admin/cate/index');

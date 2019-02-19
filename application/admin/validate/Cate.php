@@ -14,6 +14,7 @@ class Cate extends Validate
      */	
 	protected $rule = [
         'name' => 'require|max:20',
+        'icon' => 'image|fileExt:jpg,jpeg,png|fileSize:2000000',
     ];
     
     /**
