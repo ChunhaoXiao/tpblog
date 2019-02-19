@@ -17,16 +17,16 @@ class Upload extends Controller
     {
 
         $file = $request->file('image');
-        $info = $file->validate(['size'=>2000000,'ext'=>'jpg,png,gif'])->move( './public/upload');
+        $info = $file->validate(['size'=>2000000,'ext'=>'jpg,png,gif'])->move( './static/upload');
         if($info)
         {
-            echo config('app_host').'/upload/'.$info->getSaveName();
+            echo $request->host.'/static/upload/'.$info->getSaveName();
         }
         else
         {
             echo $file->getError();
         }
-        
+
     }
 
     /**
